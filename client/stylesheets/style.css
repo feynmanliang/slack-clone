@@ -2,9 +2,9 @@
   display: flex;
 }
 
-.toc {
+#sidebar {
   width: 200px;
-  min-height: 300px;
+  height: 100vh;
   position: relative;
   flex: 0 0 auto;
 }
@@ -12,14 +12,6 @@
 .article {
   display: flex;
   flex: 1 1 auto;
-}
-
-#sidebar {
-  left: 0px;
-  top: 0px;
-  width: 200px;
-  height: 100%;
-  margin-top: 0px;
 }
 
 #sidebar .channel .unread {
