@@ -1,10 +1,14 @@
 Template.registerHelper("usernameFromId", function(userId) {
-  var user = Meteor.users findOne({_id: userId});
+  var user = Meteor.users.findOne({_id: userId});
   if (typeof user === "undefined") {
     return "Anonymous";
   } else {
     return user.username;
   }
+});
+
+Template.registerHelper("formatTime", function(timestamp) {
+  return moment(timestamp).format("h:mm A");
 });
 
 Template.messages.helpers({
@@ -23,7 +27,7 @@ Template.footer.events({
       Messages.insert({
         text: messageText,
         user: Meteor.userId(),
-        timestamp: Date.now()
+        timestamp: moment()
       });
       $('.input-box_text').val('');
       $('.message-history').animate({ scrollTop : $('.message-history')[0].scrollHeight}, 200); // scroll to bottom

@@ -1,8 +1,7 @@
 Meteor.startup(function() {
   Factory.define('message', Messages, {
-    text: function() {
-      return Fake.sentence();
-    }
+    text: function() { return Fake.sentence(); },
+    timestamp: function() { return Date.now(); }
   });
 
   Messages.remove({});
