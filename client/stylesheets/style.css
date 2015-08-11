@@ -1,0 +1,65 @@
+.full.height {
+  display: flex;
+}
+
+.toc {
+  width: 200px;
+  min-height: 300px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.article {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+#sidebar {
+  left: 0px;
+  top: 0px;
+  width: 200px;
+  height: 100%;
+  margin-top: 0px;
+}
+
+#sidebar .channel .unread {
+  float: right;
+}
+
+.main.container {
+  padding: 2em 2em;
+  max-width: 960px;
+  width: auto;
+}
+
+.message-history {
+  margin: 2em 2em;
+  height: 74vh;
+  overflow-y: auto;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  left: 200px;
+  right: 1rem;
+  padding: 0em 0em 2em 0em;
+}
+.input-box {
+  margin: 0em 1em;
+}
+
+.ui.menu > .item.user-menu {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 200px;
+}
+
+.item.user-menu > .connection_status {
+  float: right;
+}
+
+.message_username {
+  margin: 0em 0em;
+}
