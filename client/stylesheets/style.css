@@ -34,7 +34,7 @@
 
 .message-history {
   margin: 2em 2em;
-  height: 74vh;
+  height: calc(100vh - 200px);
   overflow-y: auto;
 }
 
