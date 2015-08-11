@@ -1,5 +1,6 @@
 Meteor.subscribe('messages');
 Meteor.subscribe('allUsernames');
+Meteor.subscribe('channels');
 
 Template.registerHelper("usernameFromId", function(userId) {
   var user = Meteor.users.findOne({_id: userId});
