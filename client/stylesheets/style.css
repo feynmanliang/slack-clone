@@ -30,6 +30,10 @@
   overflow-y: auto;
 }
 
+.message_username {
+  display: inline;
+}
+
 .footer {
   position: fixed;
   bottom: 0px;

@@ -1,11 +1,13 @@
 <template name="message">
   <div class="ui raised segment message">
-    <a href="" class="message_profile-pic"></a>
-    <h3 href="" class="message_username">
-      scotch
-      <span class="ui label message_timestamp">1:31 AM</span>
-    </h3>
-    <span class="message_star"></span>
+    <div class="message_header">
+      <img class="ui avatar image message_profile-pic" src="/Avatar-blank.jpg">
+      <h3 class="message_username">
+        scotch
+        <span class="ui label message_timestamp">1:31 AM</span>
+      </h3>
+      <i class="empty star icon message_star"></i>
+    </div>
     <span class="message_content">{{text}}</span>
   </div>
 </template>
