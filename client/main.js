@@ -1,9 +1,12 @@
+Meteor.subscribe('messages');
+Meteor.subscribe('allUsernames');
+
 Template.registerHelper("usernameFromId", function(userId) {
   var user = Meteor.users.findOne({_id: userId});
   if (typeof user === "undefined") {
     return "Anonymous";
   } else {
-    return user.username;
+    return user.emails[0].address;
   }
 });
 
@@ -12,7 +15,7 @@ Template.registerHelper("formatTime", function(timestamp) {
 });
 
 Template.messages.helpers({
-  messages: Messages.find({})
+  messages: Messages.find({}, {sort: { timestamp: 1 }})
 });
 
 Template.footer.onRendered(function() {
@@ -24,11 +27,7 @@ Template.footer.events({
     var messageText = $('.input-box_text').val();
     if (!!messageText && event.charCode == 13) { // pressed Return
       event.stopPropagation();
-      Messages.insert({
-        text: messageText,
-        user: Meteor.userId(),
-        timestamp: moment()
-      });
+      Meteor.call('newMessage', { text: messageText });
       $('.input-box_text').val('');
       $('.message-history').animate({ scrollTop : $('.message-history')[0].scrollHeight}, 200); // scroll to bottom
       return false;
