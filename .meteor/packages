@@ -11,3 +11,6 @@ semantic:ui
 flemay:less-autoprefixer
 anti:fake
 dburles:factory
+accounts-base
+accounts-password
+accounts-ui
