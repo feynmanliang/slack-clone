@@ -4,7 +4,7 @@ Meteor.startup(function() {
     timestamp: Date.now(),
     channel: 'general'
   });
-  Factory.define('channel', Messages, {
+  Factory.define('channel', Channels, {
     name: function() { return Fake.word(); },
   });
 

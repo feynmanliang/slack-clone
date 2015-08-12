@@ -11,6 +11,12 @@ Template.registerHelper("formatTime", function(timestamp) {
   return moment(timestamp).format("h:mm A");
 });
 
+Template.header.helpers({
+  channelName: function() {
+    return Session.get('channel');
+  }
+});
+
 Template.messages.helpers({
   messages: Messages.find({}, {sort: { timestamp: 1 }})
 });
@@ -36,3 +42,18 @@ Template.footer.events({
   }
 });
 
+Template.navbar.helpers({
+  channels: function() {
+    return Channels.find();
+  }
+});
+
+Template.channel.helpers({
+  active: function() {
+    if (Session.get('channel') === this.name) {
+      return 'active';
+    } else {
+      return '';
+    }
+  }
+});

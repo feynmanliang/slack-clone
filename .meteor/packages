@@ -13,3 +13,5 @@ accounts-base
 accounts-password
 accounts-ui
 momentjs:moment
+kadira:flow-router
+kadira:blaze-layout

@@ -6,27 +6,9 @@
     <div class="item listings_channels">
       <div class="header listings_header">Channels</div>
       <div class="menu channel_list">
-        <a class="teal item active channel">
-          <span>
-            <span class="prefix">#</span>
-            hk
-          </span>
-          <span class="ui teal pointing left label unread">0</span>
-        </a>
-        <a class="teal item channel">
-          <span>
-            <span class="prefix">#</span>
-            hk
-          </span>
-          <span class="ui teal pointing left label unread">0</span>
-        </a>
-        <a class="teal item channel">
-          <span>
-            <span class="prefix">#</span>
-            hk
-          </span>
-          <span class="ui teal pointing left label unread">0</span>
-        </a>
+        {{#each channels}}
+          {{> channel name=name}}
+        {{/each}}
       </div>
     </div>
     <div class="item listings_direct-messages">
