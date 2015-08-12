@@ -7,3 +7,7 @@ Meteor.publish('allUsernames', function() {
     "username": true
   }});
 });
+
+Meteor.publish('channels', function() {
+  return Channels.find();
+});

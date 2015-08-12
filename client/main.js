@@ -1,7 +1,3 @@
-Meteor.subscribe('messages');
-Meteor.subscribe('allUsernames');
-Meteor.subscribe('channels');
-
 Template.registerHelper("usernameFromId", function(userId) {
   var user = Meteor.users.findOne({_id: userId});
   if (typeof user === "undefined") {
@@ -21,6 +17,11 @@ Template.messages.helpers({
 
 Template.footer.onRendered(function() {
   $('.message-history').scrollTop($('.message-history')[0].scrollHeight); // scroll to bottom
+  Messages.find({}).observe({
+    added: function() {
+      $('.message-history').animate({ scrollTop : $('.message-history')[0].scrollHeight}, 200); // scroll to bottom
+    }
+  })
 });
 
 Template.footer.events({
@@ -30,8 +31,8 @@ Template.footer.events({
       event.stopPropagation();
       Meteor.call('newMessage', { text: messageText });
       $('.input-box_text').val('');
-      $('.message-history').animate({ scrollTop : $('.message-history')[0].scrollHeight}, 200); // scroll to bottom
       return false;
     }
   }
 });
+
