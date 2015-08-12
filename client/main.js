@@ -35,7 +35,7 @@ Template.footer.events({
     var messageText = $('.input-box_text').val();
     if (!!messageText && event.charCode == 13) { // pressed Return
       event.stopPropagation();
-      Meteor.call('newMessage', { text: messageText });
+      Meteor.call('newMessage', { text: messageText, channel: Session.get('channel') });
       $('.input-box_text').val('');
       return false;
     }
