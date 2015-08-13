@@ -1,4 +1,7 @@
 Footer = React.createClass({
+  propTypes: {
+    channel: React.PropTypes.string.isRequired
+  },
   componentDidMount() {
     $('.message-history').scrollTop($('.message-history')[0].scrollHeight); // scroll to bottom
     Messages.find({}).observe({
@@ -8,11 +11,12 @@ Footer = React.createClass({
     })
   },
   handleKeyPress(event) {
-    var messageText = $('.input-box_text').val();
-    if (!!messageText && event.charCode == 13) { // pressed Return
+    const textInput = React.findDOMNode(this.refs.textInput)
+    const messageText = textInput.value;
+    if (!!textInput && event.charCode == 13) { // pressed Return
       event.preventDefault();
-      Meteor.call('newMessage', { text: messageText, channel: Session.get('channel') });
-      $('.input-box_text').val('');
+      Meteor.call('newMessage', { text: messageText, channel: this.props.channel });
+      textInput.value = "";
     }
   },
   render() {
@@ -20,7 +24,7 @@ Footer = React.createClass({
       <div className="footer">
         <div className="ui form input-box">
           <div className="field">
-            <textarea rows="1" className="input-box_text" onKeyPress={this.handleKeyPress}></textarea>
+            <textarea rows="1" ref="textInput" onKeyPress={this.handleKeyPress}></textarea>
           </div>
         </div>
       </div>

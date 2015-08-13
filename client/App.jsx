@@ -13,7 +13,7 @@ App = React.createClass({
           <Header channel={this.props.channel} />
           <LoginButtons />
           <MessageHistory />
-          <Footer />
+          <Footer channel={this.props.channel} />
         </div>
       </div>
     );
