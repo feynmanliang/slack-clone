@@ -9,7 +9,7 @@ FlowRouter.route('/:channel', {
     this.register('channelMessages', Meteor.subscribe('messages', params.channel));
   },
   action: function(params, queryParams) {
-    Session.set('channel', params.channel);
+    React.render(<App channel={params.channel} />, document.body);
   },
   name: "channel"
 });

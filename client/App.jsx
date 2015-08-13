@@ -1,13 +1,16 @@
 App = React.createClass({
+  propTypes: {
+    channel: React.PropTypes.string.isRequired
+  },
   getInitialState() {
     return {};
   },
   render() {
     return (
       <div className="full height">
-        <Navbar />
+        <Navbar channel={this.props.channel} />
         <div className="main ui container">
-          <Header />
+          <Header channel={this.props.channel} />
           <LoginButtons />
           <MessageHistory />
           <Footer />

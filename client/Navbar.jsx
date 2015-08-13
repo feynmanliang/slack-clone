@@ -1,4 +1,7 @@
 Navbar = React.createClass({
+  propTypes: {
+    channel: React.PropTypes.string.isRequired
+  },
   mixins: [ReactMeteorData],
   getMeteorData() {
     return {
@@ -7,7 +10,7 @@ Navbar = React.createClass({
   },
   renderChannels() {
     return this.data.channels.map((channel) => {
-      return <Channel key={channel._id} channel={channel} />
+      return <Channel key={channel._id} channel={channel} isActive={channel.name === this.props.channel} />
     });
   },
   render() {
@@ -38,17 +41,12 @@ Navbar = React.createClass({
 });
 
 Channel = React.createClass({
-  mixins: [ReactMeteorData],
-  getMeteorData() {
-    return {
-      channel: Session.get('channel')
-    };
-  },
   propTypes: {
+    isActive: React.PropTypes.bool.isRequired,
     channel: React.PropTypes.object.isRequired
   },
   active() {
-    if (this.data.channel === this.props.channel.name) {
+    if (this.props.isActive) {
       return 'active';
     } else {
       return '';
