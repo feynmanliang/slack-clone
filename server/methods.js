@@ -16,14 +16,16 @@ Meteor.methods({
     Messages.insert(message);
 
     // Update NumUnread
-    console.log(message.channel);
-    ChannelUsers.update(
+    console.log(ChannelUsers.update(
       { channel: message.channel },
-      { $inc : { numUnread: 1 } }
-    );
+      { $inc : { numUnread: 1 } },
+      {
+        multi: true
+      }
+    ));
   },
   clearNumUnread : function(channel) {
-    console.log(channel);
+    console.log('Clearing numUnread in:' + channel + ' for user:' + Meteor.userId());
     ChannelUsers.upsert(
       { user: Meteor.userId(), channel: channel },
       { $set: { numUnread: 0 } }

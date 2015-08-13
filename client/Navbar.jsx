@@ -68,6 +68,7 @@ Channel = React.createClass({
 
     let numUnread;
     if (this.props.isActive) {
+      Meteor.call('clearNumUnread', this.props.channel.name);
       numUnread = 0;
     } else {
       numUnread = channelUser ?
