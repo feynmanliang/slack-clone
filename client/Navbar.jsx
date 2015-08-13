@@ -4,9 +4,19 @@ Navbar = React.createClass({
   },
   mixins: [ReactMeteorData],
   getMeteorData() {
+    Meteor.subscribe('channels', Meteor.userId());
+    const channelNames = ChannelUsers
+      .find({ user: Meteor.userId() })
+      .map(function(elem) { return elem.channel; });
     return {
-      channels: Channels.find({}).fetch(),
+      channels: Channels.find({ name: { $in: channelNames } }).fetch()
     };
+  },
+  handleCreateChannel(e) {
+    e.preventDefault();
+    var channelName = React.findDOMNode(this.refs.newChannel).value;
+    Meteor.call('createOrJoinChannel', channelName);
+    FlowRouter.go('/' + channelName);
   },
   renderChannels() {
     return this.data.channels.map((channel) => {
@@ -21,6 +31,11 @@ Navbar = React.createClass({
         </div>
         <div className="item listings_channels">
           <div className="header listings_header">Channels</div>
+          <form className="ui form" onSubmit={this.handleCreateChannel}>
+            <div className="field">
+              <input type="text" ref="newChannel" placeholder="Create Channel"></input>
+            </div>
+          </form>
           <div className="menu channel_list">
             {this.renderChannels()}
           </div>
@@ -47,18 +62,18 @@ Channel = React.createClass({
   },
   mixins: [ReactMeteorData],
   getMeteorData() {
-    const channelUser = ChannelUsers.findOne({user: Meteor.userId(), channel: this.props.channel});
+    const channelUser = ChannelUsers.findOne(
+      {user: Meteor.userId(), channel: this.props.channel.name}
+    );
 
-    var numUnread;
-    if (channelUser) {
-      numUnread = Messages.find({
-        channel: this.props.channel._id,
-        timestamp: { $gt: channelUser.lastVisited }
-      }).count();
+    let numUnread;
+    if (this.props.isActive) {
+      numUnread = 0;
     } else {
-      numUnread = Messages.find({ channel: this.props.channel._id}).count();
+      numUnread = channelUser ?
+        channelUser.numUnread :
+        Messages.find({ channel: this.props.channel.name }).count();
     }
-
     return {
       numUnread: numUnread
     };

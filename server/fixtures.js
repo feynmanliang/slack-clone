@@ -20,9 +20,6 @@ Meteor.startup(function() {
     Channels.insert({
       name: "general"
     });
-    _(2).times(function() {
-      Factory.create('channel');
-    });
   }
 
   ChannelUsers.remove({});

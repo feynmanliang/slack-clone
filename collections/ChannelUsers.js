@@ -1,3 +1,3 @@
 // TODO: Track user-channel membership
-// Used to track read messages (lastVisited) and calculate unread message counts
+// Used to track number of unread messages
 ChannelUsers = new Mongo.Collection("channel_users")

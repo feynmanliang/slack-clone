@@ -5,6 +5,14 @@ MessageHistory = React.createClass({
       messages: Messages.find({}, {sort: { timestamp: 1 }}).fetch()
     };
   },
+  componentDidMount() {
+    $('.message-history').scrollTop($('.message-history')[0].scrollHeight); // scroll to bottom
+    Messages.find({}).observe({
+      added: function() {
+        $('.message-history').animate({ scrollTop : $('.message-history')[0].scrollHeight}, 200); // scroll to bottom
+      }
+    })
+  },
   renderMessages() {
     return this.data.messages.map((message) => {
       return <Message key={message._id} message={message} />
@@ -28,7 +36,8 @@ Message = React.createClass({
     if (typeof user === "undefined") {
       return "Anonymous";
     } else {
-      return user.emails[0].address;
+      //return user.emails[0].address;
+      return user._id;
     }
   },
   formatTime() {
