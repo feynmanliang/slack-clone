@@ -36,8 +36,7 @@ Message = React.createClass({
     if (typeof user === "undefined") {
       return "Anonymous";
     } else {
-      //return user.emails[0].address;
-      return user._id;
+      return user.username;
     }
   },
   formatTime() {

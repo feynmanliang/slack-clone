@@ -14,9 +14,10 @@ Navbar = React.createClass({
   },
   handleCreateChannel(e) {
     e.preventDefault();
-    var channelName = React.findDOMNode(this.refs.newChannel).value;
-    Meteor.call('createOrJoinChannel', channelName);
-    FlowRouter.go('/' + channelName);
+    var textInput = React.findDOMNode(this.refs.newChannel);
+    Meteor.call('createOrJoinChannel', textInput.value);
+    FlowRouter.go('/' + textInput.value);
+    textInput.value = "";
   },
   renderChannels() {
     return this.data.channels.map((channel) => {

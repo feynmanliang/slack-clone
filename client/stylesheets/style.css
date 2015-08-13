@@ -20,6 +20,7 @@
 
 .main.container {
   padding: 2em 2em;
+  width: 100%;
   max-width: 960px;
 }
 
