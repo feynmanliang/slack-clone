@@ -5,7 +5,7 @@ Navbar = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     return {
-      channels: Channels.find({}).fetch()
+      channels: Channels.find({}).fetch(),
     };
   },
   renderChannels() {
@@ -45,6 +45,24 @@ Channel = React.createClass({
     isActive: React.PropTypes.bool.isRequired,
     channel: React.PropTypes.object.isRequired
   },
+  mixins: [ReactMeteorData],
+  getMeteorData() {
+    const channelUser = ChannelUsers.findOne({user: Meteor.userId(), channel: this.props.channel});
+
+    var numUnread;
+    if (channelUser) {
+      numUnread = Messages.find({
+        channel: this.props.channel._id,
+        timestamp: { $gt: channelUser.lastVisited }
+      }).count();
+    } else {
+      numUnread = Messages.find({ channel: this.props.channel._id}).count();
+    }
+
+    return {
+      numUnread: numUnread
+    };
+  },
   active() {
     if (this.props.isActive) {
       return 'active';
@@ -57,7 +75,7 @@ Channel = React.createClass({
       <a className={"teal item channel " + this.active()} href={"/" + this.props.channel.name}>
         <span className="prefix">#</span>
         <span className="channel-name">{this.props.channel.name}</span>
-        <span className="ui teal pointing left label unread">0</span>
+        <span className="ui teal pointing left label unread">{this.data.numUnread}</span>
       </a>
     )
   }

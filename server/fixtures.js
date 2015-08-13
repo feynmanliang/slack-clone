@@ -24,4 +24,6 @@ Meteor.startup(function() {
       Factory.create('channel');
     });
   }
+
+  ChannelUsers.remove({});
 });
