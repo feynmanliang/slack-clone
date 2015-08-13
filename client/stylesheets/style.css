@@ -57,3 +57,8 @@
 .item.user-menu > .connection_status {
   float: right;
 }
+
+#userMenu {
+  left: 0px;
+  top: auto !important;
+}

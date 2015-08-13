@@ -12,6 +12,11 @@ Navbar = React.createClass({
       channels: Channels.find({ name: { $in: channelNames } }).fetch()
     };
   },
+  componentDidMount() {
+    $('.ui.dropdown').dropdown({
+      direction: 'upward'
+    });
+  },
   handleCreateChannel(e) {
     e.preventDefault();
     var textInput = React.findDOMNode(this.refs.newChannel);
@@ -44,9 +49,13 @@ Navbar = React.createClass({
         <div className="item listings_direct-messages">
           <div className="header">Direct Messages</div>
         </div>
-        <div className="item user-menu">
+        <div className="ui inverted dropdown item user-menu">
+          <div className="menu" id="userMenu">
+            <div className="item">Sign In</div>
+            <div className="item">Register</div>
+          </div>
           <img className="ui avatar image user-menu_profile-pic" src="/Avatar-blank.jpg"></img>
-          <span className="user-menu_username">danyll</span>
+          <span className="user-menu_username">{Meteor.user().username || "Anonymous"}</span>
           <span className="connection_status">
             <button className="circular ui icon green button"></button>
           </span>
